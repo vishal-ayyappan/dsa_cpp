@@ -30,6 +30,9 @@ TreeNode* getBstTree(vector<int>& preorder, int& i, int upperBound){
     i++;
     // When you go to the left, root->val becomes the upper bound for the next node to be inserted
     root->left = getBstTree(preorder, i, root->val);
+    // When you go to the right, upper bound will not change as values in the right are always greater than root->val.
+    root->right = getBstTree(preorder, i, upperBound);
+    return root;
 }
 
 TreeNode* bstFromPreorder(vector<int>& preorder) {
