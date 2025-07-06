@@ -45,3 +45,39 @@ string minWindow(string s, string t) {
 
 //TC - O(N*N)
 //SC - O(N)
+
+string minWindow(string s, string t) {
+    int n = s.length();
+    int m = t.length();
+    unordered_map<char, int> mpp;
+    //Put all the target string freq in the map
+    for (int i=0; i<m; i++){
+        mpp[t[i]]++;
+    }
+    int remaining = m;
+    int left = 0;
+    int right = 0;
+    int minLen = INT_MAX;
+    int sIdx = -1;
+    while (right < n){
+        //Check if this character is present
+        if (mpp.find(s[right]) != mpp.end()){
+            if (mpp[s[right]] > 0) remaining--;
+        }
+        mpp[s[right]]--;
+        //Once all the characters of t are found, find the minimum window
+        while (remaining == 0){
+            mpp[s[left]]++;
+            if (mpp[s[left]] > 0) remaining++;
+            minLen = min(right - left + 1, minLen);
+            if (minLen == right-left+1){
+                sIdx = left;
+            }
+            left++;
+        }
+        right++;
+    }
+    if (sIdx == -1) return "";
+    string res = s.substr(sIdx, minLen);
+    return res;
+}
