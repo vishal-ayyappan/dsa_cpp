@@ -34,3 +34,28 @@ bool isValid(string s) {
 
 //TC - O(N)
 //SC - O(N)
+
+
+//Approach 2
+
+bool isValid(string s) {
+    int n = s.size();
+    stack<char> st;
+    for (int i=0; i<s.length(); i++){
+        //One slight change from approach 1
+        if (s[i] == '(') st.push(')');
+        else if (s[i] == '{') st.push('}');
+        else if (s[i] == '[') st.push(']');
+        else{
+            if (st.empty()) return false;
+            if (s[i] == st.top()) st.pop();
+            else return false;
+        }
+    }
+    if (st.empty()) return true;
+    return false;
+}
+
+//TC - O(N)
+//SC - O(N)
+

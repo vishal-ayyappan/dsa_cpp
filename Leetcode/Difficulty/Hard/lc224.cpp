@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//Basic Calculator
+
 int priority(char c) {
     if (c == '-' || c == '+') return 1;
     else return 0;
