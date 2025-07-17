@@ -15,3 +15,6 @@ vector<int> countBits(int n) {
     }
     return ans;
 }
+
+//TC - O(N)
+//SC - O(1)
