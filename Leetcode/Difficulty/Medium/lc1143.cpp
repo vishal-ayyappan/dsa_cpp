@@ -55,22 +55,16 @@ int longestCommonSubsequence(string text1, string text2) {
 int longestCommonSubsequence(string text1, string text2) {
     int n = text1.length();
     int m = text2.length();
-    //Declare DP array
-    vector<vector<int>> dp (n+1, vector<int> (m+1, 0));
-    //
     vector<int> prevRow (m+1, 0);
-    vector<int> prevCol (n+1, 0);
     //Do what you did on recursion
     for (int i=1; i<=n; i++){
         vector<int> currRow (m+1);
-        vector<int> currCol (n+1);
         for (int j=1; j<=m; j++){
-            if (text1[i-1] == text2[j-1]) dp[i][j] = 1 + dp[i-1][j-1];
-            else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+            if (text1[i-1] == text2[j-1]) currRow[j] = 1 + prevRow[j-1];
+            else currRow[j] = max(prevRow[j], currRow[j-1]);
         }
+        prevRow = currRow;
     }
-    return dp[n][m]; 
+    return prevRow[m]; 
 }
-
-
 
