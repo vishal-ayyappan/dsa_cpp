@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+const int mod = 1e9 + 7;
+
 int getCount(string& exp, int i, int j, int wantTrue, vector<vector<vector<int>>>& dp){
     //Base Cases
     if (i > j) return 0;
@@ -26,18 +28,18 @@ int getCount(string& exp, int i, int j, int wantTrue, vector<vector<vector<int>>
         int RightFalse = getCount(exp, k+1, j, 0, dp);
         //OR operator
         if (exp[k] == '|'){
-            if (wantTrue == 1) ways += LeftTrue*RightTrue + LeftTrue*RightFalse + LeftFalse*RightTrue;
-            else ways += LeftFalse*RightFalse;
+            if (wantTrue == 1) ways = (ways + 1LL*LeftTrue*RightTrue + 1LL*LeftTrue*RightFalse + 1LL*LeftFalse*RightTrue)%mod;
+            else ways = (ways + 1LL*LeftFalse*RightFalse)%mod;
         }
         //AND Operator
         else if (exp[k] == '&'){
-            if (wantTrue == 1) ways += LeftTrue*RightTrue;
-            else ways += LeftFalse*RightFalse + LeftTrue*RightFalse + LeftFalse*RightTrue;
+            if (wantTrue == 1) ways = (ways + 1LL*LeftTrue*RightTrue)%mod;
+            else ways = (ways + 1LL*LeftFalse*RightFalse + 1LL*LeftTrue*RightFalse + 1LL*LeftFalse*RightTrue)%mod;
         }
         //XOR operator
         else{
-            if (wantTrue == 1) ways += LeftTrue*RightFalse + LeftFalse*RightTrue;
-            else ways += LeftFalse*RightFalse + LeftTrue*RightTrue;
+            if (wantTrue == 1) ways = (ways + 1LL*LeftTrue*RightFalse + 1LL*LeftFalse*RightTrue)%mod;
+            else ways = (ways + 1LL*LeftFalse*RightFalse + 1LL*LeftTrue*RightTrue)%mod;
         }
     }
     return dp[i][j][wantTrue] = ways;
