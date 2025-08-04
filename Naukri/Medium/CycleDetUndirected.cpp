@@ -4,6 +4,7 @@ using namespace std;
 
 //1 based indexing
 
+//Using DFS
 bool isCyclic(vector<vector<int>>& adjList, int node, vector<bool>& visited, int parent){
     visited[node] = true;
     int size = adjList[node].size();
@@ -17,6 +18,33 @@ bool isCyclic(vector<vector<int>>& adjList, int node, vector<bool>& visited, int
     }
     return false;
 }
+
+//Using BFS
+bool isCyclic(vector<vector<int>>& adjList, int node, vector<bool>& visited, int parent){
+    queue<pair<int, int>> q;
+    visited[node] = true;
+    q.push({node, parent});
+    while (!q.empty()){
+        int size = q.size();
+        for (int i=0; i<size; i++){
+            int temp_node = q.front().first;
+            int temp_parent = q.front().second;
+            q.pop();
+            int n = adjList[temp_node].size();
+            for (int j=0; j<n; j++){
+                int newNode = adjList[temp_node][j];
+                if (!visited[newNode]){
+                    visited[newNode] = true;
+                    q.push({newNode, temp_node});
+                }
+                //If it is the parent
+                else if (newNode != temp_parent) return true;
+            }
+        }
+    }
+    return false;
+}
+
 
 vector<vector<int>> getAdjList(vector<vector<int>>& edges, int n){
     vector<vector<int>> adjList (n+1);
