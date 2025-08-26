@@ -39,7 +39,7 @@ string longestPalindrome(string s) {
     //Generate all the substrings and then check
     int n = s.length();
     //dp[i][j] --> returns whether the array from range (i to j) is palindrome.
-    vector<vector<bool>> dp (n, vector<bool> (n, false));
+    vector<vector<bool>> dp (n, vector<bool> (n, 0));
     //Base Case
     int maxLength = 1;
     int startIndex = 0;

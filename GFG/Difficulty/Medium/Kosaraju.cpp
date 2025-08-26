@@ -26,7 +26,7 @@ void getConnections(vector<vector<int>> &rev, vector<bool> &vis, int node, vecto
 }
 
 int kosaraju(vector<vector<int>> &adj) {
-    // 0/ Sort the graph according to the finishing time
+    // 0/ Sort the graph according to the finishing time (Cannot do BFS topo sort as this can be a cyclic graph) (Only finishing time is needed)
     int n = adj.size();
     vector<int> sorted;
     vector<bool> visited (n, false);

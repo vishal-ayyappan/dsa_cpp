@@ -91,7 +91,7 @@ int minimumDifference(vector<int>& nums) {
     //Now you exactly need half the size of subset.
     int result = INT_MAX;
     for (int i=0; i<=middle; i++){
-        if (leftMap.find(i) == leftMap.end() || rightMap.find(middle-1) == rightMap.end()) continue;
+        if (leftMap.find(i) == leftMap.end() || rightMap.find(middle-i) == rightMap.end()) continue;
         vector<int> leftVec = leftMap[i];
         vector<int> rightVec = rightMap[middle-i];
         int size = leftVec.size();
