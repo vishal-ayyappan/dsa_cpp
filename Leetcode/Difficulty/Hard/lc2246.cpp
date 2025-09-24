@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//Longest Path With Different Adjacent Characters (Good, tree-graph question!)
+//Longest Path With Different Adjacent Characters (Good, tree-graph question!h)
 
 
 vector<vector<int>> getAdjList(vector<int>& parent, int n){
